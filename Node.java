@@ -1,10 +1,12 @@
 
 public class Node {
 
+    private Node parent;
     private final int x; // x y kordinatı daha farklı şekilde tutulabilir belki
     private final int y;
-    private boolean visited;
     private int visitOrder;
+    
+    private boolean visited;
 
     public Node(int x, int y) {
         this.x = x;
@@ -35,5 +37,10 @@ public class Node {
 
     public void setVisitOrder(int visitOrder) {
         this.visitOrder = visitOrder;
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(visitOrder);
     }
 }
