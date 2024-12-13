@@ -1,11 +1,12 @@
 
+
 public class Node {
 
     private Node parent;
     private final int x; // x y kordinatı daha farklı şekilde tutulabilir belki
     private final int y;
     private int visitOrder;
-    
+
     private boolean visited;
 
     public Node(int x, int y) {
@@ -13,6 +14,7 @@ public class Node {
         this.y = y;
         this.visited = false;
         this.visitOrder = -1; // Henüz ziyaret edilmediği için -1
+        this.parent = null;
     }
 
     public int getX() {
@@ -37,6 +39,14 @@ public class Node {
 
     public void setVisitOrder(int visitOrder) {
         this.visitOrder = visitOrder;
+    }
+
+    public Node getParent() {
+        return parent;
+    }
+
+    public void setParent(Node parent) {
+        this.parent = parent;
     }
 
     @Override
