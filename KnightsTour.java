@@ -1,8 +1,9 @@
 
+import java.util.Arrays;
+
 public class KnightsTour {
 
     private final int size;
-    // private Node[][] board;
 
     private final int[][] knightMoves = {
         {-2, 1}, //fronteir a eklenmek için checklenecek ilk atın konumu
@@ -17,17 +18,9 @@ public class KnightsTour {
 
     public KnightsTour(int size) {
         this.size = size;
-        // this.board = new Node[size][size];
-        // initializeBoard();
+
     }
 
-    // private void initializeBoard() {
-    //     for (int i = 0; i < size; i++) {
-    //         for (int j = 0; j < size; j++) {
-    //             board[i][j] = new Node(i, j);
-    //         }
-    //     }
-    // }
     public int[][] getKnightMoves() {
         return knightMoves;
     }
@@ -46,10 +39,12 @@ public class KnightsTour {
         }
         return false;
     }
+
     public boolean isCompleteTour(Node node) {
         return node.getVisitOrder() == size * size;
     }
-    public int getChildrenCount(Node node){
+
+    public int getChildrenCount(Node node) {
         int count = 0;
         for (int[] move : knightMoves) {
             Node nextNode = new Node(node.getX() + move[0], node.getY() + move[1]);
@@ -59,6 +54,20 @@ public class KnightsTour {
             }
         }
         return count;
+    }
+
+    public int calculateClosestCorner(Node node) {
+        int[] distances = new int[4];
+        int nodeX = node.getX();
+        int nodeY = node.getY();
+
+        distances[0] = Math.abs(nodeX - 0) + Math.abs(nodeY - 0); //left bottom corner
+        distances[1] = Math.abs(nodeX - 0) + Math.abs(nodeY - size - 1); //left top corner
+        distances[2] = Math.abs(nodeX - size - 1) + Math.abs(nodeY - 0); //right bottom corner
+        distances[3] = Math.abs(nodeX - size - 1) + Math.abs(nodeY - size - 1); //right top corner
+
+        int closest = Arrays.stream(distances).min().getAsInt();
+        return closest;
     }
 
     public void printSolution(Node node) {
