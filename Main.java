@@ -3,7 +3,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        int size = 6;
+        int size = 100;
         //inputları kullanıcıdan almamız gerekiyor.
 
         KnightsTour knightsTour = new KnightsTour(size);
@@ -16,9 +16,9 @@ public class Main {
         // boolean b = dfs.depthFirstSearch(knightsTour,startNode);
         // System.out.println("Is there a solution? " + b);
 
-        BreadthFirstSearch bfs = new BreadthFirstSearch();
-        boolean b2 = bfs.breadthFirstSearch(knightsTour,startNode);
-        System.out.println("Is there a solution? " + b2);
+        // BreadthFirstSearch bfs = new BreadthFirstSearch();
+        // boolean b2 = bfs.breadthFirstSearch(knightsTour,startNode);
+        // System.out.println("Is there a solution? " + b2);
 
         //heuristicleri dfs ile birleştireceğim. 
         DepthFirstSearchWithH1b dfs2 = new DepthFirstSearchWithH1b();

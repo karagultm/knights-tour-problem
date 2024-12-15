@@ -3,14 +3,7 @@ import java.util.Stack;
 
 public class DepthFirstSearch {
 
-    private final Node startNode;
-
-    public DepthFirstSearch(Node node) {
-        this.startNode = node;
-
-    }
-
-    public boolean depthFirstSearch(KnightsTour knightsTour) {
+    public boolean depthFirstSearch(KnightsTour knightsTour, Node startNode) {
         Stack<Node> frontier = new Stack<>();
 
         frontier.push(startNode);
