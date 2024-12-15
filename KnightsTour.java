@@ -2,8 +2,9 @@
 public class KnightsTour {
 
     private final int size;
-    private Node[][] board;
-    private final int[][] moves = {
+    // private Node[][] board;
+
+    private final int[][] knightMoves = {
         {-2, 1}, //fronteir a eklenmek için checklenecek ilk atın konumu
         {-1, 2}, //2. konum
         {1, 2}, //3. konum
@@ -16,7 +17,7 @@ public class KnightsTour {
 
     public KnightsTour(int size) {
         this.size = size;
-        this.board = new Node[size][size];
+        // this.board = new Node[size][size];
         // initializeBoard();
     }
 
@@ -27,14 +28,37 @@ public class KnightsTour {
     //         }
     //     }
     // }
-    public boolean isValidMove(int x, int y) {
-        return x >= 0 && x < size && y >= 0 && y < size && !board[x][y].isVisited();
+    public int[][] getKnightMoves() {
+        return knightMoves;
     }
 
-    public void printSolution() {
+    public boolean isValidMove(Node node) {
+        return node.getX() >= 0 && node.getX() < size && node.getY() >= 0 && node.getY() < size && !isVisited(node); //isVisited eklenmesi gerekiyor şuanda 
+    }
+
+    public boolean isVisited(Node node) {
+        Node parent = node.getParent();
+        while (parent != null) {
+            if (parent.getX() == node.getX() && parent.getY() == node.getY()) {
+                return true;
+            }
+            parent = parent.getParent();
+        }
+        return false;
+    }
+    public boolean isCompleteTour(Node node) {
+        return node.getVisitOrder() == size * size;
+    }
+
+    public void printSolution(Node node) {
+        int[][] solution = new int[size][size];
+        while (node != null) {
+            solution[node.getX()][node.getY()] = node.getVisitOrder();
+            node = node.getParent();
+        }
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
-                System.out.printf("%3d ", board[i][j].getVisitOrder());
+                System.out.print(solution[i][j] + "\t");
             }
             System.out.println();
         }

@@ -7,14 +7,12 @@ public class Node {
     private final int y;
     private int visitOrder;
 
-    private boolean visited;
 
     public Node(int x, int y) {
         this.x = x;
         this.y = y;
-        this.visited = false;
         this.visitOrder = -1; // Henüz ziyaret edilmediği için -1
-        this.parent = null;
+        this.parent = null; //0a0 konumu hariç hepsinin parentının null olması gerekir
     }
 
     public int getX() {
@@ -24,21 +22,16 @@ public class Node {
     public int getY() {
         return y;
     }
-
-    public boolean isVisited() {
-        return visited;
-    }
-
-    public void setVisited(boolean visited) {
-        this.visited = visited;
-    }
-
     public int getVisitOrder() {
         return visitOrder;
     }
-
-    public void setVisitOrder(int visitOrder) {
-        this.visitOrder = visitOrder;
+  
+    public void setVisitOrder(Node node) {
+        if (node.getParent() == null) {
+            this.visitOrder = 1;
+            return;
+        }
+        this.visitOrder = node.getParent().getVisitOrder() + 1;
     }
 
     public Node getParent() {
