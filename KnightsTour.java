@@ -49,6 +49,17 @@ public class KnightsTour {
     public boolean isCompleteTour(Node node) {
         return node.getVisitOrder() == size * size;
     }
+    public int getChildrenCount(Node node){
+        int count = 0;
+        for (int[] move : knightMoves) {
+            Node nextNode = new Node(node.getX() + move[0], node.getY() + move[1]);
+            nextNode.setParent(node);
+            if (isValidMove(nextNode)) {
+                count++;
+            }
+        }
+        return count;
+    }
 
     public void printSolution(Node node) {
         int[][] solution = new int[size][size];
