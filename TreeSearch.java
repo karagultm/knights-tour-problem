@@ -45,22 +45,18 @@ public class TreeSearch {
                 Node currentNode = algorithm.equals("a") ? frontier.poll() : frontier.pop();
                 currentNode.setVisitOrder(currentNode);
                 nodesExpanded++;
+
                 if (knightsTour.isCompleteTour(currentNode)) {
 
                     long endTime = System.currentTimeMillis();
                     long timeTaken = endTime - startTime;
 
-                    // Çözüm yolunu solutionList'e kaydet
-                    List<Node> solutionList = new ArrayList<>();
-                    Node node = currentNode;
-                    while (node != null) {
-                        solutionList.add(0, node);
-                        node = node.getParent();
-                    }
-
-                    // KnightsTourVisualizer'ı çağır
-                    KnightsTourVisualizer visualizer = new KnightsTourVisualizer(knightsTour, solutionList);
-                    visualizer.setVisible(true);
+                    /*
+                        kodu ekrda görselleştirme kısmı yapılacak burda
+                     */
+                    // Çözümü terminal yerine GUI ile göster
+                    int[][] solution = knightsTour.getSolution(currentNode);
+                    KnightsTourGUI.displaySolution(solution);
 
                     knightsTour.printSolution(currentNode);
 

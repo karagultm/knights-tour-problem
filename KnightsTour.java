@@ -115,7 +115,7 @@ public class KnightsTour {
 
     public void printSolution(Node node) {
         int[][] solution = new int[size][size];
-        
+
         while (node != null) {
             solution[node.getX()][node.getY()] = node.getVisitOrder();
             node = node.getParent();
@@ -126,5 +126,14 @@ public class KnightsTour {
             }
             System.out.println();
         }
+    }
+
+    public int[][] getSolution(Node node) {
+        int[][] solution = new int[size][size];
+        while (node != null) {
+            solution[node.getX()][node.getY()] = node.getVisitOrder();
+            node = node.getParent();
+        }
+        return solution;
     }
 }
