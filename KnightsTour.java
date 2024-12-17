@@ -8,14 +8,16 @@ public class KnightsTour {
     private final int size;
 
     private final int[][] knightMoves = {
-        {-2, 1}, //fronteir a eklenmek için checklenecek ilk atın konumu
-        {-1, 2}, //2. konum
-        {1, 2}, //3. konum
-        {2, 1}, //4. konum
-        {2, -1}, //5. konum
-        {1, -2}, //6. konum
+        {-2, -1},//8. konum
         {-1, -2}, //7. konum
-        {-2, -1}//8. konum
+        {1, -2}, //6. konum
+        {2, -1}, //5. konum
+        {2, 1}, //4. konum
+        {1, 2}, //3. konum
+        {-1, 2}, //2. konum
+        {-2, 1} //1. konum
+        
+        
     };
 
     public KnightsTour(int size) {

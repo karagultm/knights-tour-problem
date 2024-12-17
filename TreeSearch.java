@@ -38,13 +38,13 @@ public class TreeSearch {
                     return;
                 }
 
-                // Check for memory usage
-                if (heapMemoryUsage.getUsed() > heapMemoryUsage.getMax() * 0.9) {
-                    throw new OutOfMemoryError();
-                }
+                // // Check for memory usage
+                // if (heapMemoryUsage.getUsed() > heapMemoryUsage.getMax() * 0.9) {
+                //     throw new RuntimeException("Out of Memory");
+                // }
                 Node currentNode = algorithm.equals("a") ? frontier.poll() : frontier.pop();
                 currentNode.setVisitOrder(currentNode);
-                nodesExpanded++;
+                
 
                 if (knightsTour.isCompleteTour(currentNode)) {
 
@@ -89,6 +89,7 @@ public class TreeSearch {
                     boolean isHeuristicH2 = algorithm.equals("d");
                     knightsTour.heuristic(children, frontier, knightsTour, isHeuristicH2);
                 }
+                nodesExpanded++;
 
             }
             long endTime = System.currentTimeMillis();
@@ -100,7 +101,7 @@ public class TreeSearch {
             System.out.println("Time Taken: " + (timeTaken / 1000.0) + " seconds");
             System.out.println("Nodes expanded: " + nodesExpanded);
 
-        } catch (OutOfMemoryError e) {
+        } catch (Exception e) {
             System.out.println("Out of Memory.");
             System.out.println("Search Method: " + knightsTour.getAlgorithmName(algorithm));
             System.out.println("Board Size: " + knightsTour.getSize());
