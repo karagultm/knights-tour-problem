@@ -1,6 +1,10 @@
+package algorithms;
 
 import java.util.LinkedList;
 import java.util.Queue;
+
+import KnightsTour;
+import Node;
 
 public class BreadthFirstSearch {
 

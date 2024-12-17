@@ -3,6 +3,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
+import KnightsTour;
+import Node;
+
 public class DepthFirstSearchWithH2 {
 
     public boolean depthFirstSearch(KnightsTour knightsTour, Node startNode) {

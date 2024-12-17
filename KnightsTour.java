@@ -23,6 +23,10 @@ public class KnightsTour {
 
     }
 
+    public int getSize() {
+        return size;
+    }
+
     public int[][] getKnightMoves() {
         return knightMoves;
     }
@@ -44,6 +48,21 @@ public class KnightsTour {
 
     public boolean isCompleteTour(Node node) {
         return node.getVisitOrder() == size * size;
+    }
+
+    public String getAlgorithmName(String algorithm) {
+        return switch (algorithm) {
+            case "a" ->
+                "Breadth First Search";
+            case "b" ->
+                "Depth First Search";
+            case "c" ->
+                "Depth First Search with Heuristic h1b";
+            case "d" ->
+                "Depth First Search with Heuristic h2";
+            default ->
+                "Unknown Algorithm";
+        };
     }
 
     public int getChildrenCount(Node node) {
@@ -71,6 +90,7 @@ public class KnightsTour {
         int closest = Arrays.stream(distances).min().getAsInt();
         return closest;
     }
+
     public void heuristic(List<Node> children, LinkedList<Node> frontier, KnightsTour knightsTour, boolean isHeuristicH2) {
         if (children.isEmpty()) {
             return;
@@ -80,7 +100,7 @@ public class KnightsTour {
         // ilk eklenecek şekilde işleniyor.
         children.sort((node1, node2) -> {
             int childrenCount = knightsTour.getChildrenCount(node1) - knightsTour.getChildrenCount(node2);
-            
+
             if (childrenCount == 0 && isHeuristicH2) {
                 return knightsTour.calculateClosestCorner(node1) - knightsTour.calculateClosestCorner(node2);
             }
@@ -92,8 +112,10 @@ public class KnightsTour {
         }
 
     }
+
     public void printSolution(Node node) {
         int[][] solution = new int[size][size];
+        
         while (node != null) {
             solution[node.getX()][node.getY()] = node.getVisitOrder();
             node = node.getParent();
