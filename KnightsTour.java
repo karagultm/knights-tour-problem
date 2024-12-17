@@ -1,5 +1,7 @@
 
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 public class KnightsTour {
 
@@ -69,14 +71,34 @@ public class KnightsTour {
         int closest = Arrays.stream(distances).min().getAsInt();
         return closest;
     }
+    public void heuristic(List<Node> children, LinkedList<Node> frontier, KnightsTour knightsTour, boolean isHeuristicH2) {
+        if (children.isEmpty()) {
+            return;
 
+        }
+        // geçici arraylist children counta göre sıralanıyor ve frontiere en büyük olan
+        // ilk eklenecek şekilde işleniyor.
+        children.sort((node1, node2) -> {
+            int childrenCount = knightsTour.getChildrenCount(node1) - knightsTour.getChildrenCount(node2);
+            
+            if (childrenCount == 0 && isHeuristicH2) {
+                return knightsTour.calculateClosestCorner(node1) - knightsTour.calculateClosestCorner(node2);
+            }
+            return childrenCount;
+        });
+
+        while (!children.isEmpty()) {
+            frontier.push(children.remove(children.size() - 1));
+        }
+
+    }
     public void printSolution(Node node) {
         int[][] solution = new int[size][size];
         while (node != null) {
             solution[node.getX()][node.getY()] = node.getVisitOrder();
             node = node.getParent();
         }
-        for (int i = 0; i < size; i++) {
+        for (int i = size - 1; i >= 0; i--) {
             for (int j = 0; j < size; j++) {
                 System.out.print(solution[i][j] + "\t");
             }
