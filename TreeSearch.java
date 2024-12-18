@@ -38,13 +38,13 @@ public class TreeSearch {
 
                 // Solution visualization
                 int[][] solution = knightsTour.getSolution(currentNode);
-                KnightsTourGUI.displaySolution(solution);
-
-                knightsTour.printSolution(currentNode);
 
                 System.out.println("A solution found.");
                 System.out.println("Time Taken: " + (timeTaken / 1000.0) + " seconds");
                 System.out.println("Nodes expanded: " + nodesExpanded);
+
+                knightsTour.printSolution(currentNode);
+                KnightsTourGUI.displaySolution(solution);
                 return;
             }
 

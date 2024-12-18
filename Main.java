@@ -6,7 +6,7 @@ public class Main {
     public static void main(String[] args) {
 
         // inputları kullanıcıdan almamız gerekiyor.
-        try (Scanner scanner = new Scanner(System.in)) { // try-with-resources
+        try (Scanner scanner = new Scanner(System.in)) { // try-with-resources41
 
             System.out.println("\nEnter the size of the board: ");
             int size = scanner.nextInt();
@@ -28,7 +28,7 @@ public class Main {
 
             KnightsTour knightsTour = new KnightsTour(size);
             Node startNode = new Node(0, 0); //başlangıç konumu oluşturuldu
-            
+
             System.out.println("Search Method: " + knightsTour.getAlgorithmName(algorithm));
             System.out.println("Board Size: " + knightsTour.getSize());
 

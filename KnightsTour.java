@@ -1,4 +1,7 @@
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -117,16 +120,27 @@ public class KnightsTour {
 
     public void printSolution(Node node) {
         int[][] solution = new int[size][size];
-
+        StringBuilder output = new StringBuilder(); // Çıktıyı toplamak için StringBuilder
+    
         while (node != null) {
             solution[node.getX()][node.getY()] = node.getVisitOrder();
             node = node.getParent();
         }
         for (int i = size - 1; i >= 0; i--) {
             for (int j = 0; j < size; j++) {
-                System.out.print(solution[i][j] + "\t");
+                output.append(solution[i][j]).append("\t"); // Satırı biriktiriyoruz
             }
-            System.out.println();
+            output.append("\n"); // Yeni satır
+        }
+    
+
+    
+        //dosyaya yazıyoruz
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("knights_tour_solution.txt"))) {
+            writer.write(output.toString());
+            System.out.println("Solution written to knights_tour_solution.txt");
+        } catch (IOException e) {
+            System.err.println("Error writing to file: " + e.getMessage());
         }
     }
 

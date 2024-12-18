@@ -38,21 +38,30 @@ public class KnightsTourGUI {
     }
 
     private static void saveAsPNG(JFrame frame, String filePath) {
-        // Frame boyutuna göre bir görüntü oluştur
-        BufferedImage image = new BufferedImage(frame.getWidth(), frame.getHeight(), BufferedImage.TYPE_INT_ARGB);
-
-        // Frame'in içeriğini görüntüye çiz
-        Graphics2D g2d = image.createGraphics();
-        frame.paint(g2d);
-        g2d.dispose();
-
-        // Görüntüyü dosyaya kaydet
         try {
+            // Ensure all components are laid out and painted
+            frame.doLayout();
+            frame.validate();
+
+            // Create a buffered image with the frame's full dimensions
+            BufferedImage image = new BufferedImage(
+                    frame.getWidth(),
+                    frame.getHeight(),
+                    BufferedImage.TYPE_INT_ARGB
+            );
+
+            // Create graphics context directly from the frame's content pane
+            Graphics2D g2d = image.createGraphics();
+            frame.getContentPane().printAll(g2d);
+            g2d.dispose();
+
+            // Save the image
             File file = new File(filePath);
             ImageIO.write(image, "png", file);
-            System.out.println("Çözüm başarıyla kaydedildi: " + file.getAbsolutePath());
+            System.out.println("Solution image was saved to " + filePath);
+
         } catch (IOException e) {
-            System.err.println("Görüntü kaydedilemedi: " + e.getMessage());
+            System.err.println("The image couldn't be saved: " + e.getMessage());
         }
     }
 }
