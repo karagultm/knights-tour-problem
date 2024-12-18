@@ -28,10 +28,15 @@ public class Main {
 
             KnightsTour knightsTour = new KnightsTour(size);
             Node startNode = new Node(0, 0); //başlangıç konumu oluşturuldu
+            
+            System.out.println("Search Method: " + knightsTour.getAlgorithmName(algorithm));
+            System.out.println("Board Size: " + knightsTour.getSize());
 
             TreeSearch treeSearch = new TreeSearch();
             treeSearch.treeSearch(knightsTour, startNode, algorithm, timeLimit);
 
+        } catch (OutOfMemoryError e) {
+            System.out.println("Out of Memory.");
         }
     }
 }
